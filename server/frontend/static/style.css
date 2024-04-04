@@ -1,0 +1,164 @@
+body {
+    min-height: 75rem;
+    padding-top: 4.5rem;
+}
+
+.navbar-shadow {
+    /* box-shadow: 0px 15px 15px -12px #8580bb; */
+    -webkit-box-shadow: 8px 7px 11px -3px rgba(91,91,91,0.94); 
+    box-shadow: 8px 7px 11px -3px rgba(91,91,91,0.94);
+}
+
+.navbar {
+    background: rgb(2,0,36);
+    background: linear-gradient(144deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 20%, rgba(0,212,255,1) 100%);
+    border-bottom-left-radius: 38px;
+    border-bottom-right-radius: 38px;
+}
+
+#contact {
+    border: 1px solid #747474;
+    border-radius: 30px;
+    max-width: 1000px;
+    -webkit-box-shadow: 8px 7px 11px -3px rgba(91,91,91,0.94); 
+    box-shadow: 8px 7px 11px -3px rgba(91,91,91,0.94);
+}
+
+#contact > .main-img {
+    width: 100%;
+    max-width: 650px;
+    display: block;
+    margin: 0 auto;
+}
+
+#contact > #contact-details {
+    border-top: 1px solid #747474;
+}
+
+#contact-details > .image {
+    width: 60%;
+}
+
+#contact-details > .image > img {
+    display: block;
+    margin: 15px auto 0px auto;
+    width: 200px;
+}
+
+#contact-details > .sep {
+    width: 3px;
+    background-color: black;
+}
+
+#contact-details > .details {
+    min-width: 300px;
+}
+
+#contact-details > .details > h6 {
+    margin-bottom: 0px;
+    font-weight: 600;
+    color: #2c6ca9;
+}
+
+#contact-details > .details > a {
+    text-decoration: none;
+    font-weight: 300;
+    color: #2c6ca9;
+}
+#contact-details > .details > a:last-child {
+    font-weight: 600;
+}
+
+/* MOBILE */
+@media screen and (min-width: 360px) {
+
+    /**
+    body {
+        background: orange;
+    }
+    /**/
+
+    /* ABOUT PAGE */
+    main#about > div.cards {
+        flex-direction: column;
+    }
+    main#about > div.cards > div.card {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    /* CONTACT PAGE */
+    /** Contact-details Image bloc */
+    #contact-details > .image {
+        display: none;
+    }
+
+    #contact-details > .sep {
+        display: none;
+    }
+}
+
+
+/* TABLET */
+@media screen and (min-width: 601px) {
+
+    /**
+    body {
+        background: purple;
+    }
+    /**/
+
+    main#home > div.cards > div.card {
+        flex: 0 1 calc(50% - 1em);
+    }
+    main#about > div.cards {
+        flex-direction:inherit;
+        gap: 10px;
+    }
+    main#about > div.cards > div.card {
+        max-width: 50%;
+    }
+
+    /* CONTACT PAGE */
+    /** Contact-details Image bloc */
+    #contact-details > .image {
+        display: block;
+    }
+
+    #contact-details > .sep {
+        display: block;
+    }
+}
+
+/* DESKTOP */
+@media screen and (min-width: 1024px) {
+
+    /**
+    body {
+        background: pink;
+    }
+    /**/
+
+    main#home > div.cards > div.card {
+        width: 65%;
+        align-self: center;
+    }
+    main#about > div.cards {
+        flex-direction:inherit;
+        justify-content: center;
+        gap: 10px;
+    }
+    main#about > div.cards > div.card {
+        max-width: 30%;
+    }
+
+    /* CONTACT PAGE */
+    /** Contact-details Image bloc */
+    #contact-details > .image {
+        display: block;
+    }
+
+    #contact-details > .sep {
+        display: block;
+    }
+}
