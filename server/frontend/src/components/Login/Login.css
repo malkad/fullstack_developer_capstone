@@ -1,86 +1,24 @@
-.navcontainer{
-  display: flex;
-  flex: 1;
 
-  flex-direction: row;
-  margin: auto;
-  margin-top: 2%;
-  background-color: rgb(97, 64, 128);
-  align-items: flex-start;
+.login-container {
+    margin: 0px auto;
+    width: 300px;
 }
 
-.navitems{
-  display: flex;
-  flex-direction: row;
-  padding: 20px;
-  flex: 1;
-  justify-content: flex-start;
-  justify-self: center;
+.login-container > form > .input-group {
+    box-shadow: 3px 3px 3px -2px #5b5b5bf0;
 }
 
-.nav_item{
-  margin-left:15px;
-  font-size: 20px;
-  color: azure;
-  align-self: center;
+.login-container > form > div > .btn-primary {
+    margin-right: 10px;
+    box-shadow: 3px 3px 3px -2px #5b5b5bf0;
 }
 
-.input_panel {
-  display: flex;
-  flex-direction: row;
-  padding: 20px;
-  flex: 1;
-  justify-content: flex-end;
-  justify-self: center;
+.login-container > form > div > .btn-secondary {
+    box-shadow: 3px 3px 3px -2px #5b5b5bf0;
 }
 
-.input_field{
-  height:40px;
-  width:200px; 
-  font-size: medium;
-  margin:.5cm;
-}
-
-
-.action_button{
-  cursor: pointer;
-  font-size: large;
-  color: rgb(97, 64, 128);
-  border-radius: 10px;
-  height:40px;
-  padding-left:.5cm;
-  padding-right: .5cm;
-  margin: .5cm;
-}
-
-.submit:hover {
-  background-color: wheat;
-}
-
-.small_header{
-  font: 30px sans-serif;
-  color:azure;
-  margin: .5cm;
-}
-
-.username{
-  font: 30px sans-serif;
-  color:azure;
-  margin: .5cm;
-  justify-content: 'flex-end';
-  align-self:flex-end;
-}
-
-.login_panel {
-  display: flex;
-  flex-direction: column;
-  margin:auto;
-  margin: 0 auto;
-  width: 50%; 
-  padding: 20px;
-  flex: 1;
-  justify-content:center;
-  align-items: center;
-  vertical-align: middle;
-  
+.loginlink {
+    text-decoration: none;
+    font-weight: 600;
+    color: #2c6ca9;
 }
