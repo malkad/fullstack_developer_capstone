@@ -33,7 +33,7 @@ body {
 }
 
 #loginlogout > .logout {
-    color: #1459a2;
+    color: #1459a2 !important;
     text-decoration: none;
     margin-right: 20px;
     font-weight: 600;

@@ -1,88 +1,188 @@
-table{
-    margin:5px;
-    padding:10px;
-    border: grey solid 1px;
-    width:100%
-  }
-  
-  td{
-    padding:10px;
-    align-self: center;
-    border:solid grey .5px;
-    text-align: center;
-    font-size: large;
-  }
-  
-  .review_panel{
-    display: flex;
-    flex-direction: column;
-    border: solid grey;
-    position: relative;
-    height:7cm;
-    width:6cm;
-    overflow-y: scroll;
-    padding:.3cm;
-    padding-top: 0%;
-    border-radius:10px; 
-    box-shadow: 0px 1px 12px rgba(0, 0, 0, 0.5);
-    margin-bottom: .5cm;
-    justify-content: space-between;
-  }
 
-  .postreview{
-    margin:20px;
-    padding:10px;
-    font-size: larger;
-  }
+/*
+Generic Styling, for Desktops/Laptops
+*/
 
-  th{
-    padding:5px;
-    align-self: center;
-    text-align: center;
-    font-size: large;
-    margin-bottom: 1cm;
-    vertical-align: middle;
-    color: black;
-  }
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
 
-  .reviews_panel {
+thead {
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+    border-radius: 10px;
+}
+
+/* Zebra striping *
+tr:nth-of-type(odd) {
+    background: #eee;
+}
+/**/
+
+tr:hover {
+    background-color: rgb(187, 218, 244);
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+}
+td:hover {
+    background-color: rgb(149, 196, 235);
+}
+
+th {
+    /*background: #333;*/
+    color: rgb(4, 4, 4);
+    font-weight: bold;
+}
+
+td,
+th {
+    padding: 6px;
+    /*border: 1px solid #ccc;*/
+    text-align: left;
+}
+
+.id {
+    font-weight: bold;
+}
+
+.bi-person-lines-fill {
+    text-decoration: none;
+    color: #5a8bea;
+    font-size: 22px;
+}
+.bi-person-lines-fill:hover {
+    color: #1e499e;
+}
+
+.cards {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    column-gap: 1cm;
-    overflow-wrap: normal;
-    margin-top: 1cm;
-    align-items: flex-start;
-  }
-
-  .reviewer {
-    margin: 10px; /* Optional margin for spacing */
-    font-style: italic;
-    color: gray;
-    font-size: small;
 }
 
-.review {
-  margin-top: 1.5cm;
+.card, .card-header {
+    border-radius: calc(0.85rem - 1px) calc(0.85rem - 1px) 0 0 !important;
 }
 
-.emotion_icon {
-  align-self: center;
-  position:fixed;
-    width:40px;
-    height:40px;
-    background-color:#0C9;
-    color:#FFF;
-    border-radius:50px;
-    text-align:center;
-    box-shadow: 2px 2px 3px #999;  
+.card {
+    border: 1px solid #c0c0c0;
 }
 
-.review_icon {
-  width:40px;
+.card-header {
+    color: white;
+    font-size: 24px;
+    text-align: center;
+    padding: 0;
 }
 
-.review_icon:hover {
-  transform: scale(1.1);
-  border: solid lightgray;
+.reviewer > .reviewer-item{
+    margin-left: 10px;
+}
+
+.reviewer > .reviewer-item:first-child {
+    margin-left: 0px;
+}
+
+.reviewer > .reviewer-item > .bi {
+    margin-right: 5px;
+    margin-left: 10px;
+    color: #032e84;
+}
+
+h1 > .bi-person-lines-fill {
+    font-size: 36px;
+    margin-left: 20px;
+}
+
+
+#post-review > .card {
+    width: 60%;
+    margin: 10px auto 0px auto;
+    border-radius: 20px !important;
+    box-shadow: 0 .125rem .25rem rgba(0,0,0,.075);
+}
+
+#post-review > .card > .card-header > h1 {
+    margin-top: 6px;
+    color: #137fac;
+    font-size: 1.5em;
+}
+
+#post-review > .card > form > div {
+    margin-bottom: 10px;
+}
+
+#post-review > .card > form > div:last-of-type {
+    margin-bottom: 0px;
+}
+
+#post-review > .card > form > div > textarea {
+    height: 120px;
+}
+
+/*
+Max width before this PARTICULAR table gets nasty
+This query will take effect for any screen smaller than 760px
+and also iPads specifically.
+*/
+@media only screen and (max-width: 760px),
+(min-device-width: 768px) and (max-device-width: 1024px) {
+
+    /* Force table to not be like tables anymore */
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr {
+        display: block;
+    }
+
+    /* Hide table headers (but not display: none;, for accessibility) */
+    thead tr {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
+    }
+
+    tr {
+        border: 1px solid #ccc;
+        box-shadow: 0 .125rem .25rem rgba(0,0,0,.075)!important;
+        margin-bottom: 10px;
+        border-radius: 10px;
+    }
+
+    td {
+        /* Behave  like a "row" */
+        border: none;
+        border-bottom: 1px solid #eee;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    td:before {
+        /* Now like a table header */
+        position: absolute;
+        /* Top/left values mimic padding */
+        top: 6px;
+        left: 6px;
+        width: 45%;
+        padding-right: 10px;
+        white-space: nowrap;
+        font-weight: bold;
+    }
+
+    /*
+	Label the data
+	*/
+    td:nth-of-type(1):before { content: "ID"; }
+    td:nth-of-type(2):before { content: "Dealer Name"; }
+    td:nth-of-type(3):before { content: "City"; }
+    td:nth-of-type(4):before { content: "Address"; }
+    td:nth-of-type(5):before { content: "Zip"; }
+    td:nth-of-type(6):before { content: "State"; }
+    td:nth-of-type(7):before { content: "Review Dealer"; }
+
+    .cards {
+        flex-direction: column;
+    }
 }

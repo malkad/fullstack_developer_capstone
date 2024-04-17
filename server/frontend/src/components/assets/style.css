@@ -24,6 +24,25 @@ body {
     padding-left: 0px;
 }
 
+#loginlogout > .input_panel > .username {
+    margin-right: 10px;
+    color: white;
+    font-weight: 600;
+}
+
+#loginlogout > .input_panel > .logout {
+    color: #1459a2;
+    text-decoration: none;
+    margin-right: 20px;
+    font-weight: 600;
+}
+
+#loginlogout > .login {
+    color: white;
+    text-decoration: none;
+    margin-right: 10px;
+    font-weight: 600;
+}
 
 /* MOBILE */
 @media screen and (min-width: 360px) {

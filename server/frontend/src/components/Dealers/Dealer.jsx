@@ -2,92 +2,106 @@ import React, { useState,useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import "./Dealers.css";
 import "../assets/style.css";
-import positive_icon from "../assets/positive.png"
-import neutral_icon from "../assets/neutral.png"
-import negative_icon from "../assets/negative.png"
-import review_icon from "../assets/reviewbutton.png"
 import Header from '../Header/Header';
 
 const Dealer = () => {
 
+    const [dealer, setDealer] = useState({});
+    const [reviews, setReviews] = useState([]);
+    const [unreviewed, setUnreviewed] = useState(false);
+    const [postReview, setPostReview] = useState(<></>)
 
-  const [dealer, setDealer] = useState({});
-  const [reviews, setReviews] = useState([]);
-  const [unreviewed, setUnreviewed] = useState(false);
-  const [postReview, setPostReview] = useState(<></>)
+    let curr_url = window.location.href;
+    let root_url = curr_url.substring(0,curr_url.indexOf("dealer"));
+    let params = useParams();
+    let id =params.id;
+    let dealer_url = root_url+`djangoapp/dealer/${id}`;
+    let reviews_url = root_url+`djangoapp/reviews/dealer/${id}`;
+    let post_review = root_url+`postreview/${id}`;
 
-  let curr_url = window.location.href;
-  let root_url = curr_url.substring(0,curr_url.indexOf("dealer"));
-  let params = useParams();
-  let id =params.id;
-  let dealer_url = root_url+`djangoapp/dealer/${id}`;
-  let reviews_url = root_url+`djangoapp/reviews/dealer/${id}`;
-  let post_review = root_url+`postreview/${id}`;
-  
-  const get_dealer = async ()=>{
-    const res = await fetch(dealer_url, {
-      method: "GET"
-    });
-    const retobj = await res.json();
-    
-    if(retobj.status === 200) {
-      let dealerobjs = Array.from(retobj.dealer)
-      setDealer(dealerobjs[0])
+    const get_dealer = async ()=>{
+        const res = await fetch(dealer_url, {
+            method: "GET"
+        });
+        const retobj = await res.json();
+
+        if(retobj.status === 200) {
+            let dealerobjs = Array.from(retobj.dealer)
+            setDealer(dealerobjs[0])
+        }
     }
-  }
 
-  const get_reviews = async ()=>{
-    const res = await fetch(reviews_url, {
-      method: "GET"
-    });
-    const retobj = await res.json();
-    
-    if(retobj.status === 200) {
-      if(retobj.reviews.length > 0){
-        setReviews(retobj.reviews)
-      } else {
-        setUnreviewed(true);
-      }
+    const get_reviews = async ()=>{
+        const res = await fetch(reviews_url, {
+            method: "GET"
+        });
+        const retobj = await res.json();
+
+        if(retobj.status === 200) {
+            if(retobj.reviews.length > 0){
+                setReviews(retobj.reviews)
+            } else {
+                setUnreviewed(true);
+            }
+        }
     }
-  }
 
-  const senti_icon = (sentiment)=>{
-    let icon = sentiment === "positive"?positive_icon:sentiment==="negative"?negative_icon:neutral_icon;
-    return icon;
-  }
+    useEffect(() => {
+        get_dealer();
+        get_reviews();
+        if(sessionStorage.getItem("username")) {
+            setPostReview(<a class="bi bi-person-lines-fill" href={post_review}><span></span></a>)
+        }
+    },[]);
 
-  useEffect(() => {
-    get_dealer();
-    get_reviews();
-    if(sessionStorage.getItem("username")) {
-      setPostReview(<a href={post_review}><img src={review_icon} style={{width:'10%',marginLeft:'10px',marginTop:'10px'}} alt='Post Review'/></a>)
-
-      
+    const smiley = {
+        "positive": "card-header bi bi-emoji-smile bg-success",
+        "neutral": "card-header bi bi-emoji-neutral bg-secondary",
+        "negative": "card-header bi bi-emoji-frown bg-danger",
     }
-  },[]);  
 
-
-return(
-  <div style={{margin:"20px"}}>
-      <Header/>
-      <div style={{marginTop:"10px"}}>
-      <h1 style={{color:"grey"}}>{dealer.full_name}{postReview}</h1>
-      <h4  style={{color:"grey"}}>{dealer['city']},{dealer['address']}, Zip - {dealer['zip']}, {dealer['state']} </h4>
-      </div>
-      <div class="reviews_panel">
-      {reviews.length === 0 && unreviewed === false ? (
-        <text>Loading Reviews....</text>
-      ):  unreviewed === true? <div>No reviews yet! </div> :
-      reviews.map(review => (
-        <div className='review_panel'>
-          <img src={senti_icon(review.sentiment)} className="emotion_icon" alt='Sentiment'/>
-          <div className='review'>{review.review}</div>
-          <div className="reviewer">{review.name} {review.car_make} {review.car_model} {review.car_year}</div>
+    return(
+    <div>
+        <Header/>
+        <div class="container" id="dealer">
+            <div>
+                <h1>{dealer.full_name}{postReview}</h1>
+                <h4>{dealer['city']},{dealer['address']}, Zip - {dealer['zip']}, {dealer['state']} </h4>
+            </div>
+            <div class="cards d-flex">
+            {reviews.length === 0 && unreviewed === false ? (
+                <text>Loading Reviews....</text>
+            ):  unreviewed === true? <div>No reviews yet! </div> :
+            reviews.map(review => (
+                <div className='card shadow-sm m-2'>
+                    <div class={smiley[review.sentiment]}></div>
+                    <div class="card-body"><div className='review'>{review.review}</div></div>
+                    <div class="card-footer">
+                        <div className="reviewer d-flex">
+                            <div class="reviewer-item flex-fill">
+                                <span class="bi bi-person"></span>
+                                <span class="text">{review.name}</span>
+                            </div>
+                            <div class="reviewer-item flex-fill">
+                                <span class="bi bi-buildings"></span>
+                                <span class="text">{review.car_make}</span>
+                            </div>
+                            <div class="reviewer-item flex-fill">
+                                <span class="bi bi-car-front"></span>
+                                <span class="text">{review.car_model}</span>
+                            </div>
+                            <div class="reviewer-item flex-fill">
+                                <span class="bi bi-calendar-event"></span>
+                                <span class="text">{review.car_year}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            ))}
+            </div>
         </div>
-      ))}
-    </div>  
-  </div>
-)
+    </div>
+    )
 }
 
 export default Dealer

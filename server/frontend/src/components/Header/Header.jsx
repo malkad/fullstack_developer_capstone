@@ -33,7 +33,7 @@ const Header = () => {
     if ( curr_user !== null &&  curr_user !== "") {
         home_page_items = <div className="input_panel">
             <text className='username'>{sessionStorage.getItem("username")}</text>
-            <a className="nav_item" href="/djangoapp/logout" onClick={logout}>Logout</a>
+            <a className="logout" href="/djangoapp/logout" onClick={logout}>Logout</a>
         </div>
     }
 
