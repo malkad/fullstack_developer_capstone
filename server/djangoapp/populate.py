@@ -1,3 +1,5 @@
+# Just populate Car Makes and Car Models in database
+
 from .models import CarMake, CarModel
 
 def initiate():
@@ -34,7 +36,7 @@ def initiate():
         {"name":"Kluger", "type":"SUV", "year": 2023, "car_make":car_make_instances[4]},
         {"name":"RAV4", "type":"HYBRID", "year": 2024, "car_make":car_make_instances[4]},
         {"name":"BZ4", "type":"ELECTRIC", "year": 2024, "car_make":car_make_instances[4]},
-        {"name":"EV4", "type":"ELECTRIC", "year": 2023, "car_make":car_make_instances[4]},
+        {"name":"EV4", "type":"ELECTRIC", "year": 2023, "car_make":car_make_instances[3]},
         {"name":"Ioniq 5", "type":"ELECTRIC", "year": 2023, "car_make":car_make_instances[5]},
         # Add more CarModel instances as needed
     ]
