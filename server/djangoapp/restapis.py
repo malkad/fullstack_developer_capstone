@@ -1,5 +1,7 @@
-# Uncomment the imports below before you add the function code
-# import requests
+"""
+    RestApi function to get results from backend docker &
+    sentiment_analyzer_url docker images API's
+"""
 import os
 from dotenv import load_dotenv
 import requests
@@ -14,28 +16,37 @@ sentiment_analyzer_url = os.getenv(
 
 
 def get_request(endpoint, **kwargs):
+    """
+        Backend request function with url endpoint &
+        kwargs for params variables
+    """
     params = ""
-    if(kwargs):
-        for key,value in kwargs.items():
-            params=params+key+"="+value+"&"
+    if kwargs:
+        for key, value in kwargs.items():
+            params = params+key+"="+value+"&"
 
     request_url = backend_url+endpoint+"?"+params
 
-    print("GET from {} ".format(request_url))
+    print(f"GET from {request_url} ")
+
     try:
         # Call get method of requests library with URL and parameters
-        response = requests.get(request_url)
+        response = requests.get(request_url, timeout=20)
         return response.json()
-    except:
+    except ValueError:
         # If any error occurs
         print("Network exception occurred")
 
 
 def analyze_review_sentiments(text):
+    """
+        Sentiment_analyzer function
+        return positive, nautral or negative
+    """
     request_url = sentiment_analyzer_url+"/analyze/"+text
     try:
         # Call get method of requests library with URL and parameters
-        response = requests.get(request_url)
+        response = requests.get(request_url, timeout=20)
         return response.json()
     except Exception as err:
         print(f"Unexpected {err=}, {type(err)=}")
@@ -43,10 +54,13 @@ def analyze_review_sentiments(text):
 
 
 def post_review(data_dict):
+    """
+        Like she said
+    """
     request_url = backend_url+"/insert_review"
     try:
-        response = requests.post(request_url,json=data_dict)
+        response = requests.post(request_url, json=data_dict, timeout=20)
         print(response.json())
         return response.json()
-    except:
+    except ValueError:
         print("Network exception occurred")
