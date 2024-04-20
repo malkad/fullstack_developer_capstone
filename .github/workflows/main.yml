@@ -50,7 +50,7 @@ jobs:
           node-version: 16
 
       - name: Install JSHint
-        run: yarn install jshint --global
+        run: yarn global add jshint
 
       - name: Run Linter
         run: |
