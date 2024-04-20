@@ -36,26 +36,24 @@ jobs:
         find . -name "*.py" -exec flake8 {} +
         echo "Linted all the python files successfully"
 
-  eslint:
-    runs-on: ubuntu-latest
-    steps:
-        - uses: actions/checkout@v3
-        - uses: actions/setup-node@v3
-          with:
-            node-version: 16
-        - run: yarn install
-        - uses: sibiraj-s/action-eslint@v3
-          with:
-            eslint-args: '--ignore-path=.gitignore --quiet'
-            extensions: 'js,jsx,ts,tsx'
-            annotations: true
+  lint_js:
+      name: Lint JavaScript Files
+      runs-on: ubuntu-latest
 
-#   lint_js:
-#       name: Lint JavaScript Files
-#       runs-on: ubuntu-latest
-#       steps:
-#         - uses: actions/checkout@v2
-#         - name: Install modules
-#           run: yarn
-#         - name: Run ESLint
-#           run: find ./server/database -name "*.js" -exec eslint {} +
+      steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+
+      - name: Install JSHint
+        run: yarn install jshint --global
+
+      - name: Run Linter
+        run: |
+          # This command finds all JavaScript files recursively and runs JSHint on them
+          find ./server/database -name "*.js" -exec jshint {} +
+          echo "Linted all the js files successfully"
