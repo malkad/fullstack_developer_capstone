@@ -1,11 +1,12 @@
+/*jshint esversion: 8 */
 const express = require('express');
 const mongoose = require('mongoose');
 const fs = require('fs');
-const cors = require('cors')
-const app = express()
+const cors = require('cors');
+const app = express();
 const port = 3030;
 
-app.use(cors())
+app.use(cors());
 app.use(require('body-parser').urlencoded({
     extended: false
 }));
@@ -115,8 +116,8 @@ app.post('/insert_review', express.raw({
     data = JSON.parse(req.body);
     const documents = await Reviews.find().sort({
         id: -1
-    })
-    let new_id = documents[0]['id'] + 1
+    });
+    let new_id = documents[0]['id'] + 1;
 
     const review = new Reviews({
         "id": new_id,
