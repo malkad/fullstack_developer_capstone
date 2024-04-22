@@ -144,7 +144,7 @@ const PostReview = () => {
                         </div>
 
                         <div className='input-group'>
-                            <span class="input-group-text" id="label-year">Purchase Date</span>
+                            <span class="input-group-text" id="label-year">Car Year</span>
                             <input
                                 aria-describedby="label-year"
                                 type="int"
